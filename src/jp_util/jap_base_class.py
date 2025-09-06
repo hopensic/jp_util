@@ -1,6 +1,6 @@
-import common_path as cp
-from jp_util.file_util import get_obj_by_pickle_path, export_to_pickle_path
-from jp_util.pandas_util import rd_csv_sig
+from . import common_path as cp
+from .file_util import get_obj_by_pickle_path, export_to_pickle_path
+from .pandas_util import rd_csv_sig
 
 
 class JapBaseWordClass():
