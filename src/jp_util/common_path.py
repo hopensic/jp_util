@@ -37,6 +37,8 @@ meaning_url = "D:/Dropbox/06.wanjuan/02.jp/meaning/"
 r_base_freq_csv = base_url + "r_base_freq.csv"
 # 基础词频表第2版 (133638条记录)
 r_base_freq_csv_v2 = base_url + "r_base_freq_v2.csv"
+# 基础词频表第3版 (81707条记录)
+r_base_freq_csv_v3 = base_url + "r_base_freq_v3.csv"
 # 发音词频表 (104097条记录)
 r_pron_freq_csv = base_url + "r_pron_freq.csv"
 # 发音词频表 (104097条记录)
