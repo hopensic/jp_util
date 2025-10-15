@@ -12,18 +12,15 @@ pattern_td_spoken = re.compile(r"<td><span class=\"\w+\">(.+?)[\s]?</span></td>"
 # 解析音频文件正则
 pattern_voice = re.compile(r"<table[\s\S]+?>[\s\S]+?<\/table>")
 
-
 # \u2460-\u2473 ①-⑳（1-20 带圈数字）
 # \uFF21-\uFF3A 全角的A-Z
 # \uFF41-\uFF5A 全角的a-z
 # \u0391-\u03A9  大写希腊字母
 # \u03B1-\u03C9  小写希腊字母
 
-#用于过滤单词中的各种符号，数字，字母，等非日语字符
-filter_pattern = re.compile(r"[［］˚О○〇◯◎◇✖✕аА▽△▲♪☆★●|。∙｡･￥\"＂〞〝＇＊ ̊＃#ⅭK₂ⅡⅢⅣ()\-－─−←（）〔〕｛｝〒〈〉／;；<=>@＜＞＠、､_【】％+＋！!&＆'%→？…·・“”」～~※℃\/「｢｣『』{}\u2460-\u2473＝×÷（，＿:：,．\d\[\]\.\?\*a-zA-Z\uFF21-\uFF3A\uFF41-\uFF5A\u0391-\u03A9\u03B1-\u03C9]")
-
-
-
+# 用于过滤单词中的各种符号，数字，字母，等非日语字符
+filter_pattern = re.compile(
+    r"[［］˚О○〇◯◎◇✖✕аА▽△▲♪☆★●|。∙｡･￥\"＂〞〝＇＊ ̊＃#ⅭK₂ⅡⅢⅣ()\-－─−←（）〔〕｛｝〒〈〉／;；<=>@＜＞＠、､_【】％+＋！!&＆'%→？…·・“”」～~※℃\/「｢｣『』{}\u2460-\u2473＝×÷（，＿:：,．\d\[\]\.\?\*a-zA-Z\uFF21-\uFF3A\uFF41-\uFF5A\u0391-\u03A9\u03B1-\u03C9]")
 
 # ---------------------------base_url---------------------------------
 base_url = "D:/Dropbox/06.wanjuan/02.jp/freq/"
@@ -39,6 +36,9 @@ r_base_freq_csv = base_url + "r_base_freq.csv"
 r_base_freq_csv_v2 = base_url + "r_base_freq_v2.csv"
 # 基础词频表第3版 (81707条记录)
 r_base_freq_csv_v3 = base_url + "r_base_freq_v3.csv"
+# 基础词频表第4版 (81289条记录) 词条合并后
+r_base_freq_csv_v4 = base_url + "r_base_freq_v4.csv"
+
 # 发音词频表 (104097条记录)
 r_pron_freq_csv = base_url + "r_pron_freq.csv"
 # 发音词频表 (104097条记录)
@@ -53,10 +53,7 @@ w_word_2400_without_guide_csv = base_url + "w_word_2400_without_guide.csv"
 r_final_word_2400_with_freq_csv = base_url + "final/r_final_word_2400_with_freq.csv"
 w_final_word_2400_with_freq_and_level_csv = base_url + "final/w_final_word_2400_with_freq_and_level.csv"
 
-
-r_word_2400_v3_csv= base_url + "2400_v3_raw.csv" #大绝有2600
-
-
+r_word_2400_v3_csv = base_url + "2400_v3_raw.csv"  # 大绝有2600
 
 # JLPT 难易度词汇
 r_jlpt_csv = base_url + "r_jlpt.csv"
@@ -153,5 +150,3 @@ w_incr_meaning_merged_v3_3023 = meaning_url + "w_incr_meaning_merged_v3_3023.csv
 # ---------------------------音频文件---------------------------------
 r_voice_txt = base_url + "Forvo-Japanese.txt"
 r_voice_csv = base_url + "final/r_voice.csv"
-
-
