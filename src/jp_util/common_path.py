@@ -44,6 +44,10 @@ r_pron_freq_csv = base_url + "r_pron_freq.csv"
 # 发音词频表 (104097条记录)
 r_pron_freq_csv_v2 = base_url + "r_pron_freq_v2.csv"
 
+r_synonyms_mapping = base_url + "synonyms_mapping.csv"
+
+
+
 # 2400 word
 r_word_2400_xlsx = base_url + "r_word_2400.xlsx"
 r_word_2400_v2_csv = base_url + "r_word_2400_v2.csv"
