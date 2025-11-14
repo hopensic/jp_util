@@ -1,5 +1,8 @@
 import os
 import pickle
+from pathlib import Path
+
+base_pkl = Path(r'D:\12.cache\01.pkl')
 
 
 def get_file_content(filepath):
@@ -30,3 +33,16 @@ def get_obj_by_pickle_path(pickle_path: str):
 def export_to_pickle_path(obj, pickle_path: str):
     with open(pickle_path, "wb") as f:
         pickle.dump(obj, f)
+
+
+def get_obj_from_cache(object_name):
+    path = base_pkl / (object_name + '.pkl')
+    if path.exists():
+        return get_obj_by_pickle_path(path)
+    else:
+        return None
+
+
+def export_to_cache(obj, object_name):
+    path = base_pkl / (object_name + '.pkl')
+    export_to_pickle_path(obj, path)
