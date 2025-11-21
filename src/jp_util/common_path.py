@@ -28,6 +28,7 @@ jlpt_url = "D:/Dropbox/06.wanjuan/02.jp/pos/"
 course_map_url = "D:/Dropbox/06.wanjuan/02.jp/course_map/"
 article_map_url = "D:/Dropbox/06.wanjuan/02.jp/article/"
 meaning_url = "D:/Dropbox/06.wanjuan/02.jp/meaning/"
+synctrain_url = "D:/Dropbox/06.wanjuan/02.jp/synctrain/"
 
 # ---------------------------base_structure---------------------------------
 # 基础词频表 (102306条记录)
@@ -52,7 +53,18 @@ r_base_pos_csv_v2 = base_url + "r_base_pos_v2.csv"
 
 r_synonyms_mapping = base_url + "synonyms_mapping.csv"
 
+# ---------------- 同步训练
+# 出版社
+r_synctrain_press = synctrain_url + "r_synctrain_press.csv"
+# 图书
+r_synctrain_book = synctrain_url + "r_synctrain_book.csv"
+# 单元
+r_synctrain_unit = synctrain_url + "r_synctrain_unit.csv"
 
+# 阅读文章
+w_synctrain_articles = synctrain_url + "w_synctrain_articles.csv"
+w_synctrain_articles_question = synctrain_url + "w_synctrain_articles_question.csv"
+w_synctrain_articles_question_option = synctrain_url + "w_synctrain_articles_question_option.csv"
 
 # 2400 word
 r_word_2400_xlsx = base_url + "r_word_2400.xlsx"
