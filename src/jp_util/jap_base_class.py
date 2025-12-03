@@ -1,23 +1,30 @@
+from pathlib import Path
+
 from . import common_path as cp
 from .file_util import get_obj_by_pickle_path, export_to_pickle_path
 from .pandas_util import rd_csv_sig
 
 
 class JapBaseWordClass():
+    # base_word
     df_base_word = None
-    df_base_pron = None
-    df_base_meaning = None
-    df_base_pos = None
-    df_base_word_pickcle_path = "d:/95.pickle_files/df_base_word.pickle"
-    df_base_pron_pickcle_path = "d:/95.pickle_files/df_base_pron.pickle"
-    df_base_meaning_pickcle_path = "d:/95.pickle_files/df_base_meaning.pickle"
-    # -----------------
     df_base_word_v3 = None
-    df_base_word_pickcle_v3_path = "d:/95.pickle_files/df_base_word_v3.pickle"
-
-    # -----------------
     df_base_word_v4 = None
+    df_base_word_pickcle_path = "d:/95.pickle_files/df_base_word.pickle"
+    df_base_word_pickcle_v3_path = "d:/95.pickle_files/df_base_word_v3.pickle"
     df_base_word_pickcle_v4_path = "d:/95.pickle_files/df_base_word_v4.pickle"
+
+    df_base_pos = None
+
+    # base_wpron
+    df_base_pron = None
+    df_base_pron_v2 = None
+    df_base_pron_pickcle_path = "d:/95.pickle_files/df_base_pron.pickle"
+    df_base_pron_pickcle_v2_path = "d:/95.pickle_files/df_base_pron_v2.pickle"
+
+    # base_meaning
+    df_base_meaning = None
+    df_base_meaning_pickcle_path = "d:/95.pickle_files/df_base_meaning.pickle"
 
     df_synonyms_mapping = None
 
@@ -27,6 +34,16 @@ class JapBaseWordClass():
 
     def __init__(self):
         pass
+
+    @staticmethod
+    # 获取单词最新版本的数据
+    def gen_df_base_word_latest():
+        return JapBaseWordClass.gen_df_base_word_v4()
+
+    @staticmethod
+    # 获取单词发音最新版本的数据
+    def gen_df_base_pron_latest():
+        return JapBaseWordClass.gen_df_base_pron_v2()
 
     @staticmethod
     def gen_df_base_word():
@@ -43,6 +60,14 @@ class JapBaseWordClass():
             df_base_pron = rd_csv_sig(cp.r_pron_freq_csv_v2)
             export_to_pickle_path(df_base_pron, JapBaseWordClass.df_base_pron_pickcle_path)
         return df_base_pron
+
+    @staticmethod
+    def gen_df_base_pron_v2():
+        df_base_pron_v2 = get_obj_by_pickle_path(JapBaseWordClass.df_base_pron_pickcle_v2_path)
+        if df_base_pron_v2 is None:
+            df_base_pron_v2 = rd_csv_sig(cp.r_pron_freq_csv_v3)
+            export_to_pickle_path(df_base_pron_v2, JapBaseWordClass.df_base_pron_pickcle_v2_path)
+        return df_base_pron_v2
 
     @staticmethod
     def gen_df_base_pos():
@@ -76,3 +101,6 @@ class JapBaseWordClass():
     @staticmethod
     def gen_df_synonyms_mapping():
         return rd_csv_sig(cp.r_synonyms_mapping)
+
+
+
