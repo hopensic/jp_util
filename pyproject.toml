@@ -1,24 +1,40 @@
+# --------------------------uv----------------------#
+#[project]
+#name = "jp_util"
+#version = "0.1.0"
+#description = "Add your description here"
+#readme = "README.md"
+#authors = [
+#    { name = "OliverWong", email = "hopensic@gmail.com" }
+#]
+#requires-python = ">=3.12"
+#dependencies = [
+#    "pandas>=2.3.3",
+#]
+#
+#[build-system]
+#requires = ["hatchling"]
+#build-backend = "hatchling.build"
+#
+#[[tool.uv.index]]
+#url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+#default = true
+# --------------------------uv----------------------#
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "jp_util"
 version = "0.1.0"
-description = "Add your description here"
+description = "Internal utility package"
 readme = "README.md"
-authors = [
-    { name = "OliverWong", email = "hopensic@gmail.com" }
-]
+authors = [{ name = "OliverWong", email = "hopensic@gmail.com" }]
 requires-python = ">=3.12"
 dependencies = [
-    "pandas>=2.3.3",
+    "pandas>=2.2.0",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[[tool.uv.index]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-default = true
-
-
-
+[tool.setuptools.packages.find]
+where = ["src"]
 
