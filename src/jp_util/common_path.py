@@ -62,6 +62,9 @@ r_synctrain_press = synctrain_url + "r_synctrain_press.csv"
 r_synctrain_book = synctrain_url + "r_synctrain_book.csv"
 # 单元
 r_synctrain_unit = synctrain_url + "r_synctrain_unit.csv"
+# 同步训练单词
+r_synctrain_word = synctrain_url + "r_synctrain_word.csv"
+
 
 # 阅读文章
 w_synctrain_articles = synctrain_url + "w_synctrain_articles.csv"

@@ -10,6 +10,9 @@ class JapTextbookClass():
     # 单元
     df_unit = None
 
+    # 词汇
+    df_word = None
+
     def __init__(self):
         pass
 
@@ -27,3 +30,8 @@ class JapTextbookClass():
     # 获取单元数据
     def get_unit():
         return rd_csv_sig(cp.r_synctrain_unit)
+
+    @staticmethod
+    # 获取同步训练单词
+    def get_word():
+        return rd_csv_sig(cp.r_synctrain_word)
