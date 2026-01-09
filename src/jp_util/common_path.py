@@ -39,6 +39,8 @@ r_base_freq_csv_v2 = base_url + "r_base_freq_v2.csv"
 r_base_freq_csv_v3 = base_url + "r_base_freq_v3.csv"
 # 基础词频表第4版 (81289条记录) 词条合并后
 r_base_freq_csv_v4 = base_url + "r_base_freq_v4.csv"
+# 基础词频表第5版 (81741条记录) 词条合并后
+r_base_freq_csv_v5 = base_url + "r_base_freq_v5.csv"
 
 # 发音词频表 (104097条记录)
 r_pron_freq_csv = base_url + "r_pron_freq.csv"
@@ -46,9 +48,14 @@ r_pron_freq_csv = base_url + "r_pron_freq.csv"
 r_pron_freq_csv_v2 = base_url + "r_pron_freq_v2.csv"
 # 发音词频表 (137627条记录)
 r_pron_freq_csv_v3 = base_url + "r_pron_freq_v3.csv"
+# 发音词频表 (135056条记录)
+r_pron_freq_csv_v4 = base_url + "r_pron_freq_v4.csv"
 
 # 词义表(7371条记录)
 r_base_meaning_csv = base_url + "r_base_meaning.csv"
+# 词义表(40731条记录)
+r_base_meaning_csv_v2 = base_url + "r_base_meaning_v2.csv"
+
 
 # 词性表(条记录)
 r_base_pos_csv_v2 = base_url + "r_base_pos_v2.csv"

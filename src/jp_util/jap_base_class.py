@@ -10,21 +10,29 @@ class JapBaseWordClass():
     df_base_word = None
     df_base_word_v3 = None
     df_base_word_v4 = None
+    df_base_word_v5 = None
+
     df_base_word_pickcle_path = "d:/95.pickle_files/df_base_word.pickle"
     df_base_word_pickcle_v3_path = "d:/95.pickle_files/df_base_word_v3.pickle"
     df_base_word_pickcle_v4_path = "d:/95.pickle_files/df_base_word_v4.pickle"
+    df_base_word_pickcle_v5_path = "d:/95.pickle_files/df_base_word_v5.pickle"
 
     df_base_pos = None
 
     # base_wpron
     df_base_pron = None
     df_base_pron_v2 = None
+    df_base_pron_v3 = None
     df_base_pron_pickcle_path = "d:/95.pickle_files/df_base_pron.pickle"
     df_base_pron_pickcle_v2_path = "d:/95.pickle_files/df_base_pron_v2.pickle"
+    df_base_pron_pickcle_v3_path = "d:/95.pickle_files/df_base_pron_v3.pickle"
 
     # base_meaning
     df_base_meaning = None
     df_base_meaning_pickcle_path = "d:/95.pickle_files/df_base_meaning.pickle"
+
+    df_base_meaning_v2 = None
+    df_base_meaning_pickcle_v2_path = "d:/95.pickle_files/df_base_meaning_v2.pickle"
 
     df_synonyms_mapping = None
 
@@ -38,12 +46,12 @@ class JapBaseWordClass():
     @staticmethod
     # 获取单词最新版本的数据
     def gen_df_base_word_latest():
-        return JapBaseWordClass.gen_df_base_word_v4()
+        return JapBaseWordClass.gen_df_base_word_v5()
 
     @staticmethod
     # 获取单词发音最新版本的数据
     def gen_df_base_pron_latest():
-        return JapBaseWordClass.gen_df_base_pron_v2()
+        return JapBaseWordClass.gen_df_base_pron_v3()
 
     @staticmethod
     def gen_df_base_word():
@@ -70,6 +78,14 @@ class JapBaseWordClass():
         return df_base_pron_v2
 
     @staticmethod
+    def gen_df_base_pron_v3():
+        df_base_pron_v3 = get_obj_by_pickle_path(JapBaseWordClass.df_base_pron_pickcle_v3_path)
+        if df_base_pron_v3 is None:
+            df_base_pron_v3 = rd_csv_sig(cp.r_pron_freq_csv_v4)
+            export_to_pickle_path(df_base_pron_v3, JapBaseWordClass.df_base_pron_pickcle_v3_path)
+        return df_base_pron_v3
+
+    @staticmethod
     def gen_df_base_pos():
         return rd_csv_sig(cp.r_base_pos_csv_v2)
 
@@ -80,6 +96,14 @@ class JapBaseWordClass():
             df_base_meaning = rd_csv_sig(cp.r_base_meaning_csv)
             export_to_pickle_path(df_base_meaning, JapBaseWordClass.df_base_meaning_pickcle_path)
         return df_base_meaning
+
+    @staticmethod
+    def gen_df_base_meaning_v2():
+        df_base_meaning_v2 = get_obj_by_pickle_path(JapBaseWordClass.df_base_meaning_pickcle_v2_path)
+        if df_base_meaning_v2 is None:
+            df_base_meaning_v2 = rd_csv_sig(cp.r_base_meaning_csv_v2)
+            export_to_pickle_path(df_base_meaning_v2, JapBaseWordClass.df_base_meaning_pickcle_v2_path)
+        return df_base_meaning_v2
 
     @staticmethod
     def gen_df_base_word_v3():
@@ -97,10 +121,16 @@ class JapBaseWordClass():
             export_to_pickle_path(df_base_word, JapBaseWordClass.df_base_word_pickcle_v4_path)
         return df_base_word
 
+    @staticmethod
+    def gen_df_base_word_v5():
+        df_base_word = get_obj_by_pickle_path(JapBaseWordClass.df_base_word_pickcle_v5_path)
+        if df_base_word is None:
+            df_base_word = rd_csv_sig(cp.r_base_freq_csv_v5)
+            export_to_pickle_path(df_base_word, JapBaseWordClass.df_base_word_pickcle_v5_path)
+        return df_base_word
+
+
     # 获取同义词映射表
     @staticmethod
     def gen_df_synonyms_mapping():
         return rd_csv_sig(cp.r_synonyms_mapping)
-
-
-

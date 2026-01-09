@@ -17,6 +17,7 @@ pos_dic = {'動1': '动1',
            '連詞': '连词',
            '連体詞': '连体词',
            '代名詞': '代词',
+           '代詞': '代词',
            '連語': '惯用句',
            '名詞': '名词',
            '助詞': '助词',
@@ -127,7 +128,7 @@ class GeneratedMeaningParser:
         df.to_csv(output_path, index=False, encoding='utf-8-sig')
         print(f"Saved {len(df)} records → {output_path}")
 
-    #生成最终可导入系统的词义
+    # 生成最终可导入系统的词义
     def gen_available_meaning_df(selfs, df: pd.DataFrame):
         df['pos'] = df['pos'].map(pos_dic).fillna(df['pos'])
 
