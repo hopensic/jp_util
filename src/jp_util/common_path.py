@@ -41,6 +41,8 @@ r_base_freq_csv_v3 = base_url + "r_base_freq_v3.csv"
 r_base_freq_csv_v4 = base_url + "r_base_freq_v4.csv"
 # 基础词频表第5版 (81741条记录) 词条合并后
 r_base_freq_csv_v5 = base_url + "r_base_freq_v5.csv"
+# 基础词频表第6版 (81741条记录) 上一版本有一批word_id不对,更新成了之前那些被删除掉的word的word_id
+r_base_freq_csv_v6 = base_url + "r_base_freq_v6.csv"
 
 # 发音词频表 (104097条记录)
 r_pron_freq_csv = base_url + "r_pron_freq.csv"

@@ -11,11 +11,13 @@ class JapBaseWordClass():
     df_base_word_v3 = None
     df_base_word_v4 = None
     df_base_word_v5 = None
+    df_base_word_v6 = None  # 更新了一批word_id,
 
     df_base_word_pickcle_path = "d:/95.pickle_files/df_base_word.pickle"
     df_base_word_pickcle_v3_path = "d:/95.pickle_files/df_base_word_v3.pickle"
     df_base_word_pickcle_v4_path = "d:/95.pickle_files/df_base_word_v4.pickle"
     df_base_word_pickcle_v5_path = "d:/95.pickle_files/df_base_word_v5.pickle"
+    df_base_word_pickcle_v6_path = "d:/95.pickle_files/df_base_word_v6.pickle"
 
     df_base_pos = None
 
@@ -46,7 +48,7 @@ class JapBaseWordClass():
     @staticmethod
     # 获取单词最新版本的数据
     def gen_df_base_word_latest():
-        return JapBaseWordClass.gen_df_base_word_v5()
+        return JapBaseWordClass.gen_df_base_word_v6()
 
     @staticmethod
     # 获取单词发音最新版本的数据
@@ -127,6 +129,14 @@ class JapBaseWordClass():
         if df_base_word is None:
             df_base_word = rd_csv_sig(cp.r_base_freq_csv_v5)
             export_to_pickle_path(df_base_word, JapBaseWordClass.df_base_word_pickcle_v5_path)
+        return df_base_word
+
+    @staticmethod
+    def gen_df_base_word_v6():
+        df_base_word = get_obj_by_pickle_path(JapBaseWordClass.df_base_word_pickcle_v6_path)
+        if df_base_word is None:
+            df_base_word = rd_csv_sig(cp.r_base_freq_csv_v6)
+            export_to_pickle_path(df_base_word, JapBaseWordClass.df_base_word_pickcle_v6_path)
         return df_base_word
 
 
