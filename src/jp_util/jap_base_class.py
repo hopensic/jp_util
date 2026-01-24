@@ -21,11 +21,13 @@ class JapBaseWordClass():
     df_base_pron_v2, df_base_pron_pickcle_v2_path = None, "d:/95.pickle_files/df_base_pron_v2.pickle"
     df_base_pron_v3, df_base_pron_pickcle_v3_path = None, "d:/95.pickle_files/df_base_pron_v3.pickle"
     df_base_pron_v4, df_base_pron_pickcle_v4_path = None, "d:/95.pickle_files/df_base_pron_v4.pickle"
+    df_base_pron_v5, df_base_pron_pickcle_v5_path = None, "d:/95.pickle_files/df_base_pron_v5.pickle"
 
     # base_meaning
     df_base_meaning, df_base_meaning_pickcle_path = None, "d:/95.pickle_files/df_base_meaning.pickle"
     df_base_meaning_v2, df_base_meaning_pickcle_v2_path = None, "d:/95.pickle_files/df_base_meaning_v2.pickle"
     df_base_meaning_v3, df_base_meaning_pickcle_v3_path = None, "d:/95.pickle_files/df_base_meaning_v3.pickle"
+    df_base_meaning_v4, df_base_meaning_pickcle_v4_path = None, "d:/95.pickle_files/df_base_meaning_v4.pickle"
 
     df_synonyms_mapping = None
 
@@ -44,12 +46,12 @@ class JapBaseWordClass():
     @staticmethod
     # 获取单词发音最新版本的数据
     def gen_df_base_pron_latest():
-        return JapBaseWordClass.gen_df_base_pron_v4()
+        return JapBaseWordClass.gen_df_base_pron_v5()
 
     @staticmethod
     # 获取词义表最新版本的数据
     def gen_df_base_meaning_latest():
-        return JapBaseWordClass.gen_df_base_meaning_v3()
+        return JapBaseWordClass.gen_df_base_meaning_v4()
 
     # ----------------base_word--------------------------
     @staticmethod
@@ -134,6 +136,14 @@ class JapBaseWordClass():
             export_to_pickle_path(df_base_pron_v4, JapBaseWordClass.df_base_pron_pickcle_v4_path)
         return df_base_pron_v4
 
+    @staticmethod
+    def gen_df_base_pron_v5():
+        df_base_pron_v5 = get_obj_by_pickle_path(JapBaseWordClass.df_base_pron_pickcle_v5_path)
+        if df_base_pron_v5 is None:
+            df_base_pron_v5 = rd_csv_sig(cp.r_pron_freq_csv_v6)
+            export_to_pickle_path(df_base_pron_v5, JapBaseWordClass.df_base_pron_pickcle_v5_path)
+        return df_base_pron_v5
+
     # ----------------base_pos--------------------------
 
     @staticmethod
@@ -166,6 +176,16 @@ class JapBaseWordClass():
             df_base_meaning_v3['pos']=df_base_meaning_v3['pos_id'].map(pos_dict)
             export_to_pickle_path(df_base_meaning_v3, JapBaseWordClass.df_base_meaning_pickcle_v3_path)
         return df_base_meaning_v3
+
+    @staticmethod
+    def gen_df_base_meaning_v4():
+        df_base_meaning_v4 = get_obj_by_pickle_path(JapBaseWordClass.df_base_meaning_pickcle_v4_path)
+        if df_base_meaning_v4 is None:
+            df_base_meaning_v4 = rd_csv_sig(cp.r_base_meaning_csv_v4)
+            pos_dict=JapBaseWordClass.gen_df_base_pos().set_index('pos_id')['pos']
+            df_base_meaning_v4['pos']=df_base_meaning_v4['pos_id'].map(pos_dict)
+            export_to_pickle_path(df_base_meaning_v4, JapBaseWordClass.df_base_meaning_pickcle_v4_path)
+        return df_base_meaning_v4
 
     # 获取同义词映射表
     @staticmethod

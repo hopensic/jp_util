@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+from pandas import DataFrame
 
 
 # 读取
@@ -47,4 +48,29 @@ def rd_parquet(input_parquet_path):
         input_parquet_path,
         engine="pyarrow"
         # columns=["col1","col2"]   # ← 需要时只读部分列，极快
+    )
+
+
+# 连接多个dataframe
+
+
+def concat_dfs(*dfs: pd.DataFrame, ignore_index: bool = True, **concat_kwargs) -> pd.DataFrame:
+    """
+    接受任意多个 DataFrame 并拼接
+
+    用法:
+        concat_dfs(df1, df2, df3)
+        concat_dfs(*df_list)
+    """
+    if not dfs:
+        raise ValueError("至少需要传入一个 DataFrame")
+
+    non_empty_dfs = [df for df in dfs if not df.empty]
+    if not non_empty_dfs:
+        raise ValueError("所有传入的 DataFrame 都是空的")
+
+    return pd.concat(
+        non_empty_dfs,
+        ignore_index=ignore_index,
+        **concat_kwargs
     )
