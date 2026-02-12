@@ -36,19 +36,21 @@ def get_kanji_type(spell: str):
     return value_map[code]
 
 
-def get_df_col_kanji_type(df):
+def get_df_col_kanji_type(df, spell_column_name='spell'):
+    new_df = df.copy()
     for key, pattern in ranges.items():
-        df[f'has_{key}'] = df['spell'].str.contains(pattern)
-    df['code'] = (
-            df['has_kanji'].astype(int) * 4 +
-            df['has_hiragana'].astype(int) * 2 +
-            df['has_katakana'].astype(int)
+        new_df[f'has_{key}'] = new_df[spell_column_name].str.contains(pattern)
+    new_df['code'] = (
+            new_df['has_kanji'].astype(int) * 4 +
+            new_df['has_hiragana'].astype(int) * 2 +
+            new_df['has_katakana'].astype(int)
     )
-    df['kanji_type'] = df['code'].map(value_map)
-    del df['has_kanji']
-    del df['has_hiragana']
-    del df['has_katakana']
-    del df['code']
+    new_df['kanji_type'] = new_df['code'].map(value_map)
+    del new_df['has_kanji']
+    del new_df['has_hiragana']
+    del new_df['has_katakana']
+    del new_df['code']
+    return new_df
 
 
 def to_hira(text):
@@ -62,9 +64,7 @@ if __name__ == '__main__':
     # ret = get_kanji_type(text)
     # print(ret)
 
-    df = rd_csv_sig("d:/tmp/book_unit_word_202512201057.csv")
-    df['old_kanji_type']=df['kanji_type']
+    df = rd_csv_sig("d:/tmp/df_v12_to_process.csv")
+    # df['old_kanji_type']=df['kanji_type']
     get_df_col_kanji_type(df)
-    to_csv_sig(df,"d:/tmp/book_unit_word_new_kanji_type.csv")
-
-
+    to_csv_sig(df, "d:/tmp/book_unit_word_new_kanji_type.csv")
