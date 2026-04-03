@@ -1,6 +1,5 @@
 from pathlib import Path
 import pandas as pd
-from pandas import DataFrame
 
 
 # 读取
@@ -52,8 +51,6 @@ def rd_parquet(input_parquet_path):
 
 
 # 连接多个dataframe
-
-
 def concat_dfs(*dfs: pd.DataFrame, ignore_index: bool = True, **concat_kwargs) -> pd.DataFrame:
     """
     接受任意多个 DataFrame 并拼接
@@ -74,3 +71,12 @@ def concat_dfs(*dfs: pd.DataFrame, ignore_index: bool = True, **concat_kwargs) -
         ignore_index=ignore_index,
         **concat_kwargs
     )
+
+
+# 合并一个文件夹下所有的csv
+def concat_multiple_csv_infolder(fold_path:Path):
+    csv_files = list(fold_path.glob('*.csv'))
+    df_list = [rd_csv_sig(csv_file) for csv_file in csv_files if csv_file.stat().st_size > 0]
+    if not df_list:
+        return pd.DataFrame()
+    return pd.concat(df_list, ignore_index=True)

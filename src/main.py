@@ -6,7 +6,8 @@ if __name__ == '__main__':
     # JapBaseWordClass.gen_df_base_word_v4()
     # df=JapBaseWordClass.gen_df_synonyms_mapping()
     # JapBaseWordClass.gen_df_base_pron()
-    JapBaseWordClass.gen_df_base_pron_v2()
+    # JapBaseWordClass.gen_df_base_pron_v2()
     # JapBaseWordClass.gen_df_base_meaning()
+    JapBaseWordClass.get_df_morph_word()
     print(1)
 

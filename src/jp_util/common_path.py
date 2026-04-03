@@ -29,6 +29,7 @@ course_map_url = "D:/Dropbox/06.wanjuan/02.jp/course_map/"
 article_map_url = "D:/Dropbox/06.wanjuan/02.jp/article/"
 meaning_url = "D:/Dropbox/06.wanjuan/02.jp/meaning/"
 synctrain_url = "D:/Dropbox/06.wanjuan/02.jp/synctrain/"
+morph_url = "D:/Dropbox/06.wanjuan/02.jp/morph/"
 
 # ---------------------------base_structure---------------------------------
 # 基础词频表 (102306条记录)
@@ -45,6 +46,8 @@ r_base_freq_csv_v5 = base_url + "r_base_freq_v5.csv"
 r_base_freq_csv_v6 = base_url + "r_base_freq_v6.csv"
 # 基础词频表第7版 (81747条记录) 增加了6个单词: 7週間,8週間,9週間,ご存じだ,しばらくだ,白居易
 r_base_freq_csv_v7 = base_url + "r_base_freq_v7.csv"
+# 基础词频表第8版 (81843条记录) 增加了96个语法类单词,是之前删除过的.词频为30000
+r_base_freq_csv_v8 = base_url + "r_base_freq_v8.csv"
 
 # 发音词频表 (104097条记录)
 r_pron_freq_csv = base_url + "r_pron_freq.csv"
@@ -70,6 +73,8 @@ r_base_meaning_csv_v3 = base_url + "r_base_meaning_v3.csv"
 # 词义表(41305条记录)
 r_base_meaning_csv_v4 = base_url + "r_base_meaning_v4.csv"
 
+#变形表(318117条记录)
+r_base_morph_csv_v1 = morph_url + "r_base_morph_v1.csv"
 
 # 词性表(条记录)
 r_base_pos_csv_v2 = base_url + "r_base_pos_v2.csv"
