@@ -3,7 +3,36 @@ import pandas as pd
 
 
 # 读取
-def rd_csv_sig(path, index_columns=None):
+def rd_csv_sig(path, index_columns=None, string_columns=None):
+    return pd.read_csv(
+        path,
+        encoding="utf-8-sig",
+        on_bad_lines="skip",
+        engine="python",
+        dtype_backend="numpy_nullable",
+        index_col=index_columns
+
+    )
+
+
+def rd_csv_folder_with_strcolumns(path, index_columns=None, string_columns=None):
+    """
+           读取CSV文件
+
+           参数:
+               path: 文件路径
+               index_columns: 设置为索引的列（可为None、str或list）
+               string_columns: 需要强制转为字符串的列（防止true/false自动转布尔）
+                               可传入字符串、列表或None
+           """
+    # 处理 string_columns 参数
+    dtype_dict = {}
+    if string_columns is not None:
+        if isinstance(string_columns, str):
+            string_columns = [string_columns]
+
+        for col in string_columns:
+            dtype_dict[col] = 'string'
     return pd.read_csv(
         path,
         encoding="utf-8-sig",
@@ -11,6 +40,8 @@ def rd_csv_sig(path, index_columns=None):
         engine="python",
         dtype_backend="numpy_nullable",
         index_col=index_columns,
+        dtype=dtype_dict
+
     )
 
 
@@ -74,9 +105,18 @@ def concat_dfs(*dfs: pd.DataFrame, ignore_index: bool = True, **concat_kwargs) -
 
 
 # 合并一个文件夹下所有的csv
-def concat_multiple_csv_infolder(fold_path:Path):
+def concat_multiple_csv_infolder(fold_path: Path):
     csv_files = list(fold_path.glob('*.csv'))
-    df_list = [rd_csv_sig(csv_file) for csv_file in csv_files if csv_file.stat().st_size > 0]
+    df_list = []
+    for csv_file in csv_files:
+        if csv_file.stat().st_size == 0:
+            print(f"[skip] 空文件: {csv_file.name}")
+            continue
+        df = rd_csv_sig(csv_file)
+        if df.empty or df.dropna(how='all').empty:
+            print(f"[skip] 无有效数据: {csv_file.name}")
+            continue
+        df_list.append(df)
     if not df_list:
         return pd.DataFrame()
-    return pd.concat(df_list, ignore_index=True)
+    df_all = pd.concat(df_list, ignore_index=True)
