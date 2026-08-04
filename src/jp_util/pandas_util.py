@@ -3,15 +3,15 @@ import pandas as pd
 
 
 # 读取
-def rd_csv_sig(path, index_columns=None, string_columns=None):
+def rd_csv_sig(path, index_columns=None, sep: str = ','):
     return pd.read_csv(
         path,
         encoding="utf-8-sig",
         on_bad_lines="skip",
         engine="python",
         dtype_backend="numpy_nullable",
-        index_col=index_columns
-
+        index_col=index_columns,
+        sep=sep
     )
 
 
@@ -51,8 +51,15 @@ def rd_csv_folder_sig(folder, path, index_columns=None):
 
 
 # 导出
-def to_csv_sig(df, path, need_index=False):
-    df.to_csv(path, index=need_index, encoding="utf-8-sig")
+# def to_csv_sig(df, path, need_index=False, sep=','):
+#     if sep == ',':
+#         df.to_csv(path, index=need_index, encoding="utf-8-sig")
+#     else:
+#         df.to_csv(path, index=need_index, encoding="utf-8-sig", sep=sep)
+#     print(f"Saved {len(df)} records → {path}")
+
+def to_csv_sig(df: pd.DataFrame, path, index: bool = False, sep: str = ',', **kwargs) -> None:
+    df.to_csv(path, index=index, encoding="utf-8-sig", sep=sep, **kwargs)
     print(f"Saved {len(df)} records → {path}")
 
 
@@ -70,6 +77,7 @@ def to_parquet(df, output_parquet_path):
         compression_level=6,  # zstd 建议 3~9，越大越小越慢
         index=False  # 通常不需要存索引
     )
+    print(f"Saved {len(df)} records → {output_parquet_path}")
 
 
 # 读取parquet
@@ -104,6 +112,24 @@ def concat_dfs(*dfs: pd.DataFrame, ignore_index: bool = True, **concat_kwargs) -
     )
 
 
+# 合并多个文件夹下的csv文件
+def concat_multiple_csv_infolders_multiple_folder(*folders: Path) -> pd.DataFrame:
+    df_list = []
+    for folder in folders:
+        for csv_file in folder.glob("*.csv"):
+            if csv_file.stat().st_size == 0:
+                print(f"[skip] 空文件: {csv_file.name}")
+                continue
+            df = rd_csv_sig(csv_file)
+            if df.empty or df.dropna(how="all").empty:
+                print(f"[skip] 无有效数据: {csv_file.name}")
+                continue
+            df_list.append(df)
+    if not df_list:
+        return pd.DataFrame()
+    return pd.concat(df_list, ignore_index=True)
+
+
 # 合并一个文件夹下所有的csv
 def concat_multiple_csv_infolder(fold_path: Path):
     csv_files = list(fold_path.glob('*.csv'))
@@ -120,3 +146,23 @@ def concat_multiple_csv_infolder(fold_path: Path):
     if not df_list:
         return pd.DataFrame()
     df_all = pd.concat(df_list, ignore_index=True)
+    return df_all
+
+
+# 合并一个文件夹下所有的parquet文件
+def concat_multiple_parquet_infolder(fold_path: Path):
+    parquet_files = list(fold_path.glob('*.parquet'))
+    df_list = []
+    for parquet_file in parquet_files:
+        if parquet_file.stat().st_size == 0:
+            print(f"[skip] 空文件: {parquet_file.name}")
+            continue
+        df = rd_parquet(parquet_file)
+        if df.empty or df.dropna(how='all').empty:
+            print(f"[skip] 无有效数据: {parquet_file.name}")
+            continue
+        df_list.append(df)
+    if not df_list:
+        return pd.DataFrame()
+    df_all = pd.concat(df_list, ignore_index=True)
+    return df_all

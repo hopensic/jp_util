@@ -48,7 +48,7 @@ def export_to_cache(obj, object_name):
     export_to_pickle_path(obj, path)
 
 
-# 删除指定目录下的所有csv文件
+# 删除指定目录下的所有csv,
 def delete_csv_files_pure_python(directory: str, recursive: bool = False):
     """纯 Python 删除 .csv 文件"""
     dir_path = Path(directory)
@@ -64,3 +64,24 @@ def delete_csv_files_pure_python(directory: str, recursive: bool = False):
             print(f"删除失败 {file}: {e}")
 
     print(f"共删除 {len(csv_files)} 个 .csv 文件")
+
+
+def delete_csv_parquet_files_pure_python(directory: str, recursive: bool = False):
+    """纯 Python 删除 .csv 和 .parquet 文件"""
+    dir_path = Path(directory)
+
+    extensions = ["*.csv", "*.parquet"]
+    pattern_prefix = "**/" if recursive else ""
+
+    all_files = []
+    for ext in extensions:
+        all_files.extend(dir_path.glob(f"{pattern_prefix}{ext}"))
+
+    for file in all_files:
+        try:
+            file.unlink()
+            print(f"已删除: {file}")
+        except Exception as e:
+            print(f"删除失败 {file}: {e}")
+
+    print(f"共删除 {len(all_files)} 个文件")
